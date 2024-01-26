@@ -14,7 +14,7 @@ app.use(cors()) // enable cors to comminicate with frontend
 
 
 
-// CRUD ; 
+// CRUD ; //test
 // Create -> post (create something in the database );   
 // Read --> GET (read data from database ) 
 // Update --> PUT (edit the data in db and update it )
