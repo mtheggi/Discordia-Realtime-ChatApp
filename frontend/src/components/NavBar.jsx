@@ -17,7 +17,7 @@ const NavBar = () => {
                         <strong>Discordia</strong>
                     </h4>
                 </Navbar.Brand>
-                <span style={{ color: "orange" }}><strong> Logged in as heggi </strong> </span>
+                <span style={{ color: "green" }}><strong> Logged in as heggi </strong> </span>
                 <Nav >
                     <Stack direction="horizontal" >
                         <Nav.Link href="/login" style={{ color: "white" }}> <strong >Login </strong > </Nav.Link>
