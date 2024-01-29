@@ -7,11 +7,16 @@ const port = process.env.PORT || 3000; // to set the environment port or 3000
 
 // connect to datbase 
 mongoose.connect(process.env.ATLAS_CONNECTION_STRING).then(()=>{ console.log('database connected')}).catch((err)=>{ console.log("MongoDB connection failed" );console.log(err)});
+// importing Routes 
+const userRoute = require('./Routes/userRoute') ; 
+
+
 
 // middlewares 
 app.use(express.json()); // parse json bodies 
 app.use(cors()) // enable cors to comminicate with frontend 
 
+app.use("/api/users" , userRoute); 
 
 
 // CRUD ; //test
