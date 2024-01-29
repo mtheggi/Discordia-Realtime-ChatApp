@@ -2,6 +2,7 @@ const userModel = require('../Models/userModel');
 const bcrypt = require("bcrypt"); 
 const validator = require("validator"); 
 const jwt = require("jsonwebtoken"); 
+const { restart } = require('nodemon');
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY; 
 
@@ -65,6 +66,38 @@ const loginUser = async (req ,res) => {
     }
 }
 
+const findUser = async (req, res )=> { 
+
+    const userId = req.params.userId; 
+    try {
+        let user = await userModel.findById(userId); 
 
 
-module.exports = {registerUser,loginUser} ; 
+        res.status(200).json(user); 
+
+    }catch(err) {
+        console.log(err); 
+        res.status(500).json(err); 
+    }
+
+
+}
+
+
+const getUsers = async (req, res )=> { 
+
+    try {
+        let users = await userModel.find(); 
+
+
+        res.status(200).json(users); 
+
+    }catch(err) {
+        console.log(err); 
+        res.status(500).json(err); 
+    }
+
+
+}
+
+module.exports = {registerUser,loginUser, findUser,getUsers} ; 
