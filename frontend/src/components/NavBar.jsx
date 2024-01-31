@@ -4,7 +4,7 @@ import { Container, Nav, Navbar, Stack } from 'react-bootstrap';
 import { AuthContext } from '../context/AuthContext';
 
 const NavBar = () => {
-    const { user } = useContext(AuthContext);
+    const { user, logoutUser } = useContext(AuthContext);
 
     return (
         <Navbar bg="dark" className="mb-4 m-0" style={{ alignContent: "center", height: "3.75rem", width: "100%" }}>
@@ -21,11 +21,16 @@ const NavBar = () => {
                         <strong>Discordia</strong>
                     </h4>
                 </Navbar.Brand>
-                <span style={{ color: "green" }}><strong> Logged in as {user?.name} </strong> </span>
-                <Nav >
+
+                {user ? <span style={{ color: "green" }}><strong> Logged in as {user?.name} </strong> </span> : <></>}
+                <Nav>
                     <Stack direction="horizontal" >
-                        <Nav.Link href="/login" style={{ color: "white" }}> <strong >Login </strong > </Nav.Link>
-                        <Nav.Link href="/register" style={{ color: "white" }}> <strong>Register</strong> </Nav.Link>
+                        {
+                            user ? <Nav.Link href="/login" style={{ color: "white" }} onClick={logoutUser}> <strong >Logout </strong > </Nav.Link> :
+                                <><Nav.Link href="/login" style={{ color: "white" }}> <strong >Login </strong > </Nav.Link>
+                                    <Nav.Link href="/register" style={{ color: "white" }}> <strong>Register</strong> </Nav.Link></>
+
+                        }
 
                     </Stack>
                 </Nav>

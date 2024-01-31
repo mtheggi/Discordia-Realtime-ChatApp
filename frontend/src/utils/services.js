@@ -24,8 +24,6 @@ export const postRequest= async(url , body ) => {
         }
         return {error:true , message}
     }
-
-
     return data 
 
 }
