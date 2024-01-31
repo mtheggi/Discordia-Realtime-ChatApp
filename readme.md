@@ -1,3 +1,4 @@
+## Technology used and lesson learned
 * using scocket.io to create realtime chat-App for messaging and notification system 
 * using Managing state using context API and hooks 
 * code reuse (custom Hooks and until functions ) 

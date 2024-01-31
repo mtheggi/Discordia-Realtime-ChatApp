@@ -13,8 +13,8 @@ const userRoute = require('./Routes/userRoute') ;
 
 
 // middlewares 
-app.use(express.json()); // parse json bodies 
 app.use(cors()) // enable cors to comminicate with frontend 
+app.use(express.json()); // parse json bodies 
 
 app.use("/api/users" , userRoute); 
 
