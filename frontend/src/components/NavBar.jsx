@@ -1,7 +1,11 @@
 
+import { useContext } from 'react';
 import { Container, Nav, Navbar, Stack } from 'react-bootstrap';
+import { AuthContext } from '../context/AuthContext';
 
 const NavBar = () => {
+    const { user } = useContext(AuthContext);
+
     return (
         <Navbar bg="dark" className="mb-4 m-0" style={{ alignContent: "center", height: "3.75rem", width: "100%" }}>
             <Container className="mb-1 mt-2" style={{ width: "100%" }}>
@@ -17,7 +21,7 @@ const NavBar = () => {
                         <strong>Discordia</strong>
                     </h4>
                 </Navbar.Brand>
-                <span style={{ color: "green" }}><strong> Logged in as heggi </strong> </span>
+                <span style={{ color: "green" }}><strong> Logged in as {user?.name} </strong> </span>
                 <Nav >
                     <Stack direction="horizontal" >
                         <Nav.Link href="/login" style={{ color: "white" }}> <strong >Login </strong > </Nav.Link>

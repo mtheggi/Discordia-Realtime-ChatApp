@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { createContext, useState, useCallback } from "react";
+import { createContext, useState, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { baseUrl, postRequest } from "../utils/services";
 
@@ -15,6 +15,14 @@ export const AuthContextProvider = ({ children }) => {
         email: "",
         password: ""
     })
+    useEffect(() => {
+        let user = localStorage.getItem('User');
+        if (user) {
+            setsuccess(true);
+        }
+        setUser(JSON.parse(user));
+
+    }, [])
 
     const registerUser = useCallback(async (e) => {
         e.preventDefault();

@@ -8,6 +8,7 @@ const Register = () => {
     // const { user, setUser } = useContext(AuthContext);
     const { user, registerInfo, setRegisterInfo, registerError, registerUser, isRegisterLoading, success } = useContext(AuthContext);
 
+
     return (
         <Form onSubmit={registerUser}>
             <Row style={{ height: "100vh", justifyContent: "center", paddingTop: "15%" }}>
