@@ -9,16 +9,12 @@ const port = process.env.PORT || 3000; // to set the environment port or 3000
 mongoose.connect(process.env.ATLAS_CONNECTION_STRING).then(()=>{ console.log('database connected')}).catch((err)=>{ console.log("MongoDB connection failed" );console.log(err)});
 // importing Routes 
 const userRoute = require('./Routes/userRoute') ; 
-
+const chatRoute = require('./Routes/chatRoute'); 
 
 
 // middlewares 
 app.use(cors()) // enable cors to comminicate with frontend 
 app.use(express.json()); // parse json bodies 
-
-app.use("/api/users" , userRoute); 
-
-
 // CRUD ; //test
 // Create -> post (create something in the database );   
 // Read --> GET (read data from database ) 
@@ -27,7 +23,8 @@ app.use("/api/users" , userRoute);
 
 // app.get (path , call_back_function(request  , response ) ); 
 //--------------------------- Routes---------------------------// 
-
+app.use("/api/users" , userRoute); 
+app.use("/api/chats" ,chatRoute); 
 app.get('/', (req , res)=>{
     res.send('Hello World')
 
