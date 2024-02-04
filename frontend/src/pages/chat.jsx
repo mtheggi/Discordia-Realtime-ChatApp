@@ -5,6 +5,7 @@ import { Container, Stack } from "react-bootstrap";
 import { AuthContext } from "../context/AuthContext";
 import Loading from "../components/Loading";
 import UserChat from "../components/UserChat";
+import PossibleChats from "../components/PossibleChats";
 const Chat = () => {
     const { userChats, isUserChatsLoading, userChatsError } = useContext(ChatContext);
     const { user } = useContext(AuthContext);
@@ -15,8 +16,9 @@ const Chat = () => {
 
     return (
         <Container>
+            <PossibleChats />
             {userChats?.length === 0 ? null : (
-                <Stack direction="horizontal" gap={4} className="align-items-start">
+                <Stack direction="horizontal" gap={4} className="align-items-start flex-wrap">
                     <Stack className="flex-grow-0 messages-box pe-3" gap={2}>
 
                         {isUserChatsLoading ? <Loading /> : (
