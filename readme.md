@@ -27,3 +27,11 @@ a realtime chatapp for messaging and notification system using socket.io and Rea
 * using MongoDB and mongoose to create and manage database
 * state management using context API.
 
+## Acknowledgment and References used 
+* project is inspired by [Chaooo Charles](https://www.youtube.com/@ChaooCharles) tutorial
+* [socket.io](https://socket.io/) learn how to use socket.io to create a realtime chat app
+* [JWT](https://jwt.io/) how to use JWT to create and manage authentication in Node.js
+* [Bootstrap-ClassNames](https://getbootstrap.com/docs/4.0/getting-started/introduction/) to create responsive design
+* [Web-Dev-Simplified](https://www.youtube.com/@WebDevSimplified) to learn more about custom hooks and until functions
+
+

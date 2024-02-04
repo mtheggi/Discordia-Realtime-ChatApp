@@ -15,7 +15,7 @@ const UserChat = ({ chat, user }) => {
     }, [reciever])
 
 
-    console.log(reciever);
+    // console.log(reciever);
     return (
         <Stack direction="horizontal" className="user-card p-2 mb-1 justify-content-between" role='button'>
             <div className="d-flex flex-row m-0">

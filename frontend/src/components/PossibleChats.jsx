@@ -8,7 +8,7 @@ import { AuthContext } from "../context/AuthContext";
 const PossibleChats = () => {
     const { possibleChats, createChat } = useContext(ChatContext);
     const { user } = useContext(AuthContext);
-    console.log(possibleChats);
+    // console.log(possibleChats);
     return (
         <Stack direction="horizontal" className="mb-3 flex-wrap">
             {possibleChats && possibleChats.map((u) => {

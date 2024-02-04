@@ -10,6 +10,35 @@ export const ChatContextProvider = ({ children, user }) => {
     const [isUserChatsLoading, setIsUserChatsLoading] = useState(false);
     const [userChatsError, setUserChatsError] = useState(null);
     const [possibleChats, setPossibleChats] = useState([]);
+    const [currentChat, setCurrentChat] = useState(null);
+    const [messages, setMessages] = useState(null);
+    const [isMessageLoading, setIsMessageLoading] = useState(false);
+    const [messagesError, setMessagesError] = useState(null);
+    console.log("current Chat", currentChat);
+    console.log("Messages", messages);
+    useEffect(() => {
+        const getMessages = async () => {
+            if (user?._id) {
+                setIsMessageLoading(true);
+                setMessagesError(null);
+
+
+                const res = await getRequest(`${baseUrl}/messages/${currentChat?._id}`);
+                setIsMessageLoading(false);
+                if (res.error) {
+                    setMessagesError(res);
+                    return console.log("Error in fetching Messages ");
+                }
+
+                setMessages(res);
+
+
+            }
+        };
+        getMessages();
+    }, [currentChat])
+
+
 
     const getPossibleChats = async () => {
         if (user?._id) {
@@ -85,7 +114,11 @@ export const ChatContextProvider = ({ children, user }) => {
         isUserChatsLoading,
         userChatsError,
         possibleChats,
-        createChat
+        createChat,
+        setCurrentChat,
+        currentChat,
+        messages,
+        isMessageLoading
     }}>
         {children}
     </ChatContext.Provider>

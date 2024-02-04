@@ -24,7 +24,7 @@ export const useFetchRecChat = (chat, user) => {
             setReciever(res);
         }
         getUser();
-    }, [user])
+    }, [recieverId])
 
 
     return { reciever }
