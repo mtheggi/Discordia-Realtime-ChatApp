@@ -22,7 +22,7 @@ const NavBar = () => {
                     </h4>
                 </Navbar.Brand>
 
-                {user ? <span style={{ color: "green" }}><strong> Logged in as {user?.name} </strong> </span> : <></>}
+                {user ? <span style={{ color: "green" }}><strong>  {user?.name} </strong> </span> : <></>}
                 <Nav>
                     <Stack direction="horizontal" >
                         {
