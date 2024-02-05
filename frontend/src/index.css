@@ -99,7 +99,7 @@ body {
 
 .message.self {
   color: black;
-  background: rgb(255, 243, 22);
+  background: rgb(22, 185, 255);
 }
 
 .message-footer {
@@ -116,7 +116,7 @@ body {
 }
 .send-btn {
   border: none;
-  background: rgba(72, 112, 223, 1);
+  background: rgb(1, 52, 193);
   color: white;
   height: 40px;
   width: 40px;

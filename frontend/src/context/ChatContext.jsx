@@ -1,7 +1,8 @@
 /* eslint-disable */
-import { createContext, useState, useCallback, useEffect } from "react";
+import { createContext, useState, useCallback, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import { baseUrl, postRequest, getRequest } from "../utils/services";
+import { AuthContext } from "./AuthContext";
 
 export const ChatContext = createContext();
 
@@ -14,8 +15,13 @@ export const ChatContextProvider = ({ children, user }) => {
     const [messages, setMessages] = useState(null);
     const [isMessageLoading, setIsMessageLoading] = useState(false);
     const [messagesError, setMessagesError] = useState(null);
-    console.log("current Chat", currentChat);
-    console.log("Messages", messages);
+
+    const [newMessage, setNewMessage] = useState(null);
+    const [newMessageError, setNewMessageError] = useState(null);
+
+
+    // console.log("current Chat", currentChat);
+    // console.log("Messages", messages);
     useEffect(() => {
         const getMessages = async () => {
             if (user?._id) {
@@ -105,6 +111,22 @@ export const ChatContextProvider = ({ children, user }) => {
 
     useEffect(() => { getPossibleChats(); }, [userChats]);
 
+    const SendMessage = useCallback(async (textmessage, chatId, senderId, setTextMessage) => {
+        //chatId, senderId, text 
+        if (!textmessage) return console.log("you must type something ");
+
+        const body = { chatId: chatId, senderId: senderId, text: textmessage };
+
+        const res = await postRequest(`${baseUrl}/messages/`, JSON.stringify(body));
+
+        if (res.error) {
+            return setNewMessageError(res);
+        }
+        setNewMessage(res);
+        setMessages((prev) => [...prev, res]);
+        setTextMessage("");
+
+    }, [])
 
 
 
@@ -118,7 +140,8 @@ export const ChatContextProvider = ({ children, user }) => {
         setCurrentChat,
         currentChat,
         messages,
-        isMessageLoading
+        isMessageLoading,
+        SendMessage
     }}>
         {children}
     </ChatContext.Provider>
