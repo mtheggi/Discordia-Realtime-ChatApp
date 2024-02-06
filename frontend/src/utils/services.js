@@ -1,4 +1,5 @@
-export const baseUrl = "http://localhost:8080/api"
+// export const baseUrl = "http://localhost:8080/api"
+export const baseUrl = "https://discordia-realtime-chat-app.vercel.app";
 export const postRequest = async (url, body) => {
     console.log(url);
 
