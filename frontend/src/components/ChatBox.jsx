@@ -14,6 +14,11 @@ const ChatBox = () => {
     const { user } = useContext(AuthContext);
     const { reciever } = useFetchRecChat(currentChat, user);
     const [textMessage, setTextMessage] = useState("");
+    const messagesEndRef = useRef(null);
+
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
 
 
 
@@ -43,7 +48,7 @@ const ChatBox = () => {
 
                 })}
 
-                {/* <div ref={messagesEndRef} /> */}
+                <div ref={messagesEndRef} />
             </Stack>
 
             <Stack direction="horizontal" gap={3} className="chat-input flex-grow-0">
