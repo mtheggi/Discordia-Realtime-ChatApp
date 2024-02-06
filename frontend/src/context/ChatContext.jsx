@@ -20,7 +20,11 @@ export const ChatContextProvider = ({ children, user }) => {
     const [socket, setSocket] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
 
-    //RecieveMessage 
+    const [notifications, setNotifications] = useState([]);
+    const [allUsers, setAllUsers] = useState([]);
+
+    console.log("notifications ", notifications);
+    //RecieveMessage/Notification  
     useEffect(() => {
         if (socket === null || user === null) return;
         socket.on("getMessage", (message) => {
@@ -31,9 +35,18 @@ export const ChatContextProvider = ({ children, user }) => {
             setMessages((prev) => [...prev, { chatId, senderId, text, _id, createdAt, updatedAt, __v }]);
         });
 
+        socket.on("getNotification", (res) => {
+            const isChatOpen = currentChat?.members.some(id => { return id === res.senderId });
+            if (isChatOpen) {
+                setNotifications(prev => [{ ...res, isRead: true }, ...prev]);
+            } else {
+                setNotifications(prev => [res, ...prev]);
+            }
+        })
 
         return () => {
             socket.off("getMessage");
+            socket.off("getNotification");
         }
     }, [socket, currentChat]);
 
@@ -112,6 +125,7 @@ export const ChatContextProvider = ({ children, user }) => {
             if (res.error) {
                 return console.log("Chatcontext , getPossible Chats , Error in fetching possible chats. ");
             }
+            setAllUsers(res);
             const newPossibleChats = res.filter((u) => {
                 let isChatcreated = false;
                 if (user?._id === u?._id) return false;
@@ -188,7 +202,10 @@ export const ChatContextProvider = ({ children, user }) => {
     }, [])
 
 
-
+    const readAllNotifications = useCallback((notifications) => {
+        const mNot = notifications.map((n) => { return { ...n, isRead: true } });
+        setNotifications(mNot);
+    }, [])
 
     return <ChatContext.Provider value={{
         userChats,
@@ -201,7 +218,10 @@ export const ChatContextProvider = ({ children, user }) => {
         messages,
         isMessageLoading,
         SendMessage,
-        onlineUsers
+        onlineUsers,
+        notifications,
+        allUsers,
+        readAllNotifications
     }}>
         {children}
     </ChatContext.Provider>

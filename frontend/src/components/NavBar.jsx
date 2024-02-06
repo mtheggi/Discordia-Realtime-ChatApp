@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 import { Container, Nav, Navbar, Stack } from 'react-bootstrap';
 import { AuthContext } from '../context/AuthContext';
-
+import Notification from './Notification';
 const NavBar = () => {
     const { user, logoutUser } = useContext(AuthContext);
 
@@ -26,7 +26,9 @@ const NavBar = () => {
                 <Nav>
                     <Stack direction="horizontal" >
                         {
-                            user ? <Nav.Link href="/login" style={{ color: "white" }} onClick={logoutUser}> <strong >Logout </strong > </Nav.Link> :
+                            user ? <> <Notification />  <Nav.Link href="/login" style={{ color: "white" }} onClick={logoutUser}> <strong >Logout </strong > </Nav.Link> </> :
+
+
                                 <><Nav.Link href="/login" style={{ color: "white" }}> <strong >Login </strong > </Nav.Link>
                                     <Nav.Link href="/register" style={{ color: "white" }}> <strong>Register</strong> </Nav.Link></>
 
