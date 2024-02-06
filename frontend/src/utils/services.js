@@ -1,5 +1,5 @@
-export const baseUrl = "http://localhost:8080/api"
-
+// export const baseUrl = "https://localhost:8080/api"
+export const baseUrl = "https://Discordia-RealTime-ChatApp-api"
 export const postRequest = async (url, body) => {
     console.log(url);
 
