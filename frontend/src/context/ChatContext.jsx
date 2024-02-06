@@ -1,8 +1,7 @@
 /* eslint-disable */
 import { createContext, useState, useCallback, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
 import { baseUrl, postRequest, getRequest } from "../utils/services";
-import { AuthContext } from "./AuthContext";
+import { io } from "socket.io-client";
 
 export const ChatContext = createContext();
 
@@ -18,10 +17,70 @@ export const ChatContextProvider = ({ children, user }) => {
 
     const [newMessage, setNewMessage] = useState(null);
     const [newMessageError, setNewMessageError] = useState(null);
+    const [socket, setSocket] = useState(null);
+    const [onlineUsers, setOnlineUsers] = useState([]);
+
+    //RecieveMessage 
+    useEffect(() => {
+        if (socket === null || user === null) return;
+        socket.on("getMessage", (message) => {
+            if (currentChat?._id !== message?.chatId) return;
+            const { chatId, senderId, text, _id, createdAt, updatedAt, __v } = message;
+
+            // console.log("mymess", mymessage);
+            setMessages((prev) => [...prev, { chatId, senderId, text, _id, createdAt, updatedAt, __v }]);
+        });
 
 
-    // console.log("current Chat", currentChat);
+        return () => {
+            socket.off("getMessage");
+        }
+    }, [socket, currentChat]);
+
+
+    // sendMessage 
+    useEffect(() => {
+        if (socket === null || user === null) return;
+
+        const recieverId = currentChat?.members?.find((id) => id !== user?._id);
+
+        socket.emit("sendMessage", { ...newMessage, recieverId })
+
+    }, [newMessage])
+
+    console.log("newMessages ", newMessage);
+    useEffect(() => {
+        const newSocket = io("http://localhost:3000");
+        setSocket(newSocket);
+
+        return () => {
+            newSocket.disconnect();
+        }
+    }, [user])
+
+
+    useEffect(() => {
+        if (socket === null || user === null) return;
+        socket.emit("addNewUser", user?._id);
+        socket.on("getOnlineUsers", (onlineUsers) => {
+            setOnlineUsers(onlineUsers);
+        })
+
+        return () => {
+            socket.off("getOnlineUsers"); // remove the listener 
+        }
+    }, [socket])
+
+
+
+
+    console.log("OnlineUsers", onlineUsers);
     // console.log("Messages", messages);
+
+
+
+
+
     useEffect(() => {
         const getMessages = async () => {
             if (user?._id) {
@@ -141,7 +200,8 @@ export const ChatContextProvider = ({ children, user }) => {
         currentChat,
         messages,
         isMessageLoading,
-        SendMessage
+        SendMessage,
+        onlineUsers
     }}>
         {children}
     </ChatContext.Provider>

@@ -2,12 +2,14 @@
 import { Stack } from "react-bootstrap";
 import { useFetchRecChat } from "../Hooks/useFetchRecChat";
 import { AvatarGenerator } from 'random-avatar-generator';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { ChatContext } from "../context/ChatContext";
 
 const UserChat = ({ chat, user }) => {
     const { reciever } = useFetchRecChat(chat, user);
     const generator = new AvatarGenerator();
     const [avatar, setAvatar] = useState("./defaultAvatar.jpg");
+    const { onlineUsers } = useContext(ChatContext);
 
     useEffect(() => {
         const newAvatar = generator.generateRandomAvatar(reciever?._id);
@@ -31,7 +33,7 @@ const UserChat = ({ chat, user }) => {
             <div className="d-flex flex-column align-items-end">
                 <div className="date"> 1/1/2012</div>
                 <div className="this-user-notifications"><strong>2</strong></div>
-                <div className="user-online"></div>
+                <div className={onlineUsers?.some((u) => u?.userId === reciever?._id) ? "user-online" : ""}></div>
 
             </div>
 
