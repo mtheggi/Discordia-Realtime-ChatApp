@@ -14,6 +14,7 @@ const messageRoute = require('./Routes/messageRoute');
 
 
 // middlewares 
+app.use(express.static('public'));
 app.use(cors()) // enable cors to comminicate with frontend 
 app.use(express.json()); // parse json bodies 
 // CRUD ; //test
