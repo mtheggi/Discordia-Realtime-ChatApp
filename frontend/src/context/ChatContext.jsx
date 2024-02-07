@@ -63,7 +63,7 @@ export const ChatContextProvider = ({ children, user }) => {
 
     console.log("newMessages ", newMessage);
     useEffect(() => {
-        const newSocket = io("https://discordia-realtime-chat-app-upbv.vercel.app");
+        const newSocket = io("http://localhost:3000");
         setSocket(newSocket);
 
         return () => {

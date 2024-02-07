@@ -1,6 +1,6 @@
 const { Server, Socket } = require("socket.io");
 
-const io = new Server({ cors: "https://discordia-realtime-chat-app-iju8.vercel.app" });
+const io = new Server({ cors: "http://localhost:5173" });
 
 let onlineUsers = [];
 

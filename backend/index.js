@@ -14,14 +14,10 @@ const messageRoute = require('./Routes/messageRoute');
 
 
 // middlewares 
-app.use(express.static('public'));
+// app.use(express.static('public'));
 app.use(cors()) // enable cors to comminicate with frontend 
 app.use(express.json()); // parse json bodies 
-// CRUD ; //test
-// Create -> post (create something in the database );   
-// Read --> GET (read data from database ) 
-// Update --> PUT (edit the data in db and update it )
-// Delete --> /DELETE (delete the data from db )
+
 
 // app.get (path , call_back_function(request  , response ) ); 
 //--------------------------- Routes---------------------------// 
@@ -34,10 +30,6 @@ app.get('/', (req, res) => {
 
 
 })
-
-
-
-
 app.listen(port, (req, res) => {
     console.log(`server is running on port ${port}`)
 })
