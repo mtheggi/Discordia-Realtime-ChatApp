@@ -48,7 +48,7 @@ https://github.com/mtheggi/Discordia-Realtime-ChatApp/assets/88272272/feee2a63-d
     JWT_SECRET_KEY="your_secret_key"
 ```
 4. open [http://localhost:5173](http://localhost:5173) to view it in the browser.
-
+### 🔺 do not use any real credentials while testing or developing the app. 🔺 
 # main features in the project
 
 * realtime messaging and notification system
@@ -82,12 +82,12 @@ https://github.com/mtheggi/Discordia-Realtime-ChatApp/assets/88272272/feee2a63-d
 * separating the frontend and backend and socket server.
 * backend structure and best practices.
 
-## Acknowledgment and References used 
+# Acknowledgment and References used 
 *this project is inspired by [Chaooo Charles](https://www.youtube.com/@ChaooCharles) tutorial
 * [Web-Dev-Simplified](https://www.youtube.com/@WebDevSimplified) to learn more about custom hooks and until functions
 * [socket.io](https://socket.io/) learn how to use socket.io to create a realtime chat app
 * [JWT](https://jwt.io/) how to use JWT to create and manage authentication in Node.js
 * [Bootstrap-ClassNames](https://getbootstrap.com/docs/4.0/getting-started/introduction/) to create responsive design
 
-
-
+# LICENSE
+MIT- License
